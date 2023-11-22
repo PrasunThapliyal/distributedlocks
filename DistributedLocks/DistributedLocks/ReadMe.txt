@@ -8,6 +8,8 @@ Implement Distributed Locks - For use in a micro-service environment
 Initial Commit
 	Create new ASP.NET Core Web API using dotnet 6
 -----------------------------------------
+Add EFCore
+	Add DB Context
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
