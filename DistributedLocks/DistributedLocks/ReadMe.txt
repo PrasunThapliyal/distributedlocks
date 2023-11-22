@@ -11,6 +11,10 @@ Initial Commit
 Add EFCore
 	Add DB Context
 -----------------------------------------
+Add Migration to create DB
+	Since we are planning to use Advisory Locks, there should be no need for a table
+	However, advisory locks work on an integer value, and we are going to create a table just to create a map of Guid (Entitiy Id) to Long (Advisory Lock Id)
+
 -----------------------------------------
 -----------------------------------------
 -----------------------------------------
