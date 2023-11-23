@@ -2,6 +2,8 @@ using DistributedLocks.DBContext;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore;
+using DistributedLocks.DistributedLock;
+using DistributedLocks.NetworkDesign;
 
 namespace DistributedLocks
 {
@@ -19,6 +21,11 @@ namespace DistributedLocks
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddSingleton<IDBContextProvider, DBContextProvider>();
+            builder.Services.AddSingleton<IEntityIdToLockIdMap, EntityIdToLockIdMap>();
+            builder.Services.AddSingleton<INetworkManager, NetworkManager>();
+            builder.Services.AddTransient<IDistributedLock, DistributedLocks.DistributedLock.DistributedLock>();
 
             var app = builder.Build();
 

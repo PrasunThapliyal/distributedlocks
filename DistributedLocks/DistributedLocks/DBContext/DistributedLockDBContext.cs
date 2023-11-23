@@ -9,14 +9,18 @@ namespace DistributedLocks.DBContext
     {
         private readonly ILogger<DistributedLockDBContext> logger;
         private readonly IConfiguration configuration;
+        private readonly IServiceProvider serviceProvider;
 
         public DistributedLockDBContext(
             ILogger<DistributedLockDBContext> logger,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IServiceProvider serviceProvider)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            this.serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
         }
+        public virtual DbSet<EntityIdToLockId>? EntityIdToLockId { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -44,5 +48,7 @@ namespace DistributedLocks.DBContext
             modelBuilder.Entity<EntityIdToLockId>().Property(e => e.LockId).HasColumnName("lock_id");
             modelBuilder.Entity<EntityIdToLockId>().HasKey(e => e.EntityId);
         }
+
+
     }
 }
